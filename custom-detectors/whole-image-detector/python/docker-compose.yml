@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  whole-image-detector:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8101:8101
+    #   - 5678:5678 # for debugpy
+    # expose:
+    #   - "5678"
+    volumes:
+      - type: bind
+        source: "./app"
+        target: "/app"

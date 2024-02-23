@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  visionapi-proxy:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8100:8100
+    #   - 5678:5678 # for debugpy
+    # expose:
+    #   - "5678"
+    volumes:
+      - type: bind
+        source: "./app"
+        target: "/app"
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/run/secrets/vision-api-service-account-key
+    secrets:
+       - vision-api-service-account-key
+
+secrets:
+  vision-api-service-account-key:
+    file: ./secrets/vision-api-service-account-key.json
+  
